@@ -1,40 +1,48 @@
 <div class="home">
   <form class="form-wrapper" [class.without-posts]="!artists.length">
     <div class="search-wrapper">
-      <input name="search" [(ngModel)]="searchText" placeholder="Search for an artist" type="text" autocomplete="off"
+      <!-- <input class="input w-full max-w-xs" name="search" [(ngModel)]="searchText" placeholder="Search for an artist" type="text" autocomplete="off"
         (keyup)="callSearch()" />
 
-      <!-- Generator: Adobe Illustrator 26.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-      <svg class="icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 297.9 297.9"
-        style="enable-background: new 0 0 297.9 297.9" xml:space="preserve">
-        <style type="text/css">.st0 {fill: #c6c6c6;}.st1 {fill: #ffffff;}.st2 {fill: #939393;}</style>
-        <g>
-          <path class="st0" d="M219,187.6c8.7,8.7,8.7,22.7,0,31.4c-8.7,8.7-22.7,8.7-31.4,0l-50.1-50.1c-8.7-8.7-8.7-22.7,0-31.4
-                    c8.7-8.7,22.7-8.7,31.4,0L219,187.6z" />
-          <circle class="st0" cx="100.7" cy="100.7" r="100.7" />
-          <circle class="st1" cx="100.7" cy="100.7" r="75.9" />
-          <path class="st2" d="M179.5,230.5c-13-13-13-34.2,0-47.2c13-13,34.2-13,47.2,0l54.6,54.6c13,13,13,34.2,0,47.2
-                    c-13,13-34.2,13-47.2,0L179.5,230.5z" />
-        </g>
-      </svg>
+        <span class="w-1">
+          <svg class="icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 297.9 297.9"
+            style="enable-background: new 0 0 297.9 297.9" xml:space="preserve">
+            <style type="text/css">.st0 {fill: #c6c6c6;}.st1 {fill: #ffffff;}.st2 {fill: #939393;}</style>
+            <g>
+              <path class="st0" d="M219,187.6c8.7,8.7,8.7,22.7,0,31.4c-8.7,8.7-22.7,8.7-31.4,0l-50.1-50.1c-8.7-8.7-8.7-22.7,0-31.4
+                        c8.7-8.7,22.7-8.7,31.4,0L219,187.6z" />
+              <circle class="st0" cx="100.7" cy="100.7" r="100.7" />
+              <circle class="st1" cx="100.7" cy="100.7" r="75.9" />
+              <path class="st2" d="M179.5,230.5c-13-13-13-34.2,0-47.2c13-13,34.2-13,47.2,0l54.6,54.6c13,13,13,34.2,0,47.2
+                        c-13,13-34.2,13-47.2,0L179.5,230.5z" />
+            </g>
+          </svg>
+        </span> -->
+
+          <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </div>
+            <input class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="search" [(ngModel)]="searchText" placeholder="Search for an artist" type="text" autocomplete="off"
+            (keyup)="callSearch()" />
+            <!-- <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button> -->
+        </div>
     </div>
   </form>
 
-  <div class="cards-display" [class.card-width]="artists.length < 4" *ngIf="artists.length > 0">
-    <a [routerLink]="['/artist/', artist.id]" [queryParams]="{name: artist.name}" class="cards-wrapper"
-      *ngFor="let artist of artists">
-      <img src="{{ artist.images.length > 0 ? artist.images[0].url : '/assets/images/default-image.png' }}"
-        alt="{{ 'image of ' + artist.name }}" />
-      <div class="content-wrapper">
-        <div>
-          <h2 class="title">{{ artist.name }}</h2>
-          <p class="followers-count">{{ artist.followers.total | number }} Followers</p>
-        </div>
+  <div class="container mx-auto p-6 mt-4 grid md:grid-cols-4 gap-6" [class.card-width]="artists.length < 4" *ngIf="artists.length > 0">
+    <a class="card bg-base-100 shadow-xl" [routerLink]="['/artist/', artist.id]" [queryParams]="{name: artist.name}" *ngFor="let artist of artists">
+      <figure><img class="aspect-square" src="{{ artist.images.length > 0 ? artist.images[0].url : '/assets/images/default-image.png' }}" alt="{{ 'image of ' + artist.name }}" /></figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ artist.name }}</h2>
+        <p>{{ artist.followers.total | number }} Followers</p>
         <!-- <span>{{ artist.popularity }}</span> -->
         <!-- <ngb-rating [rate]="artist.popularity / 20" [max]="5" [readonly]="true"></ngb-rating> -->
       </div>
     </a>
   </div>
-
 </div>
