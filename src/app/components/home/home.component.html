@@ -11,7 +11,6 @@
     </div>
 </form>
 
-
 <div infiniteScroll [attr.infiniteScrollDistance]="1" [attr.infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
   <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6" [class.card-width]="artists.length < 4" *ngIf="artists.length > 0">
     <a class="card shadow-xl glass" [routerLink]="['/artist/', artist.id]" [queryParams]="{name: artist.name}" *ngFor="let artist of artists">
@@ -24,5 +23,3 @@
     </a>
   </div>
 </div>
-
-

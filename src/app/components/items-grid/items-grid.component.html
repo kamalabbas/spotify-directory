@@ -5,9 +5,8 @@
       <star-rating [starType]="'svg'" [rating]="artist?.popularity / 10"></star-rating>
       <h2 class="card-title">{{ artist.name }}</h2>
       <p>{{ artist?.followers?.total | number }} Followers</p>
+
+      <ng-content></ng-content>
     </div>
   </a>
 </div>
-
-  
-  

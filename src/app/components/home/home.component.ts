@@ -66,6 +66,7 @@ export class HomeComponent implements OnInit {
       },
       error: (err: any) => {
         this.artists = [];
+        this.offset = 0;
       },
     });
   }
