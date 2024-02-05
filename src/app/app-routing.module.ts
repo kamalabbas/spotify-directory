@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-import { NotFoundComponent } from './layout/not-found/not-found.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ArtistRegistrationComponent } from './components/artist-registration/artist-registration.component';
 
 const routes: Routes = [
   // default route
@@ -10,6 +11,10 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./components/login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'artist-register',
+    component: ArtistRegistrationComponent
   },
   {
     path: 'home',

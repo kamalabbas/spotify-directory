@@ -1,13 +1,14 @@
 
-<div class="container p-6 mx-auto">
 
-  <div>
-    <h1 class="artist-name text-4xl mb-4">{{artistName}}</h1>
-    <span class="text-2xl">Albums</span>
+  <div class="mt-6 mb-6">
+    <div class="flex items-center">
+      <button class="mr-4 flex items-center btn btn-neutral" (click)="goBack()"><mat-icon class="mr-1" aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon></button>
+      <h1 class="artist-name text-4xl">{{artistName}}</h1>
+    </div>
   </div>
 
   <div class="mt-6 grid md:grid-cols-4 gap-6" *ngIf="artist?.items.length > 0">
-      <div class="card bg-base-100 shadow-xl" *ngFor="let album of artist.items">        
+      <div class="card glass shadow-xl" *ngFor="let album of artist.items">        
         <figure><img src="{{ album.images.length > 0 ? album.images[0].url : '/assets/images/default-image.png' }}" alt="{{ 'image of ' + album.name }}" /></figure>
 
         <div class="card-body">
@@ -24,21 +25,6 @@
         </div>
         <div class="card-actions p-6 text-center w-100 mx-auto">
           <a class="preview-button" href="{{album.external_urls.spotify}}" target="blank" >Preview on spotify</a>
-          <!-- <button class="btn btn-primary">Buy Now</button> -->
         </div>
       </div>
   </div>
-</div>
-
-
-
-        
-<!-- <div class=" mt-4 grid grid-cols-4 gap-6" [class.card-width]="artists.length < 4" *ngIf="artists.length > 0">
-  <a class="card bg-base-100 shadow-xl" [routerLink]="['/artist/', artist.id]" [queryParams]="{name: artist.name}" *ngFor="let artist of artists">
-    <figure><img class="aspect-square" src="{{ artist.images.length > 0 ? artist.images[0].url : '/assets/images/default-image.png' }}" alt="{{ 'image of ' + artist.name }}" /></figure>
-    <div class="card-body">
-      <h2 class="card-title">{{ artist.name }}</h2>
-      <p>{{ artist.followers.total | number }} Followers</p>
-    </div>
-  </a>
-</div> -->

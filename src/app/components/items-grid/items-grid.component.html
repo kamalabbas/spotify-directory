@@ -1,0 +1,13 @@
+<div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6" [class.card-width]="artists && artists.length < 4" *ngIf="artists && artists.length > 0">
+  <a class="card shadow-xl glass" [routerLink]="['/artist/', artist.id]" [queryParams]="{name: artist.name}" *ngFor="let artist of artists">
+    <figure><img class="aspect-square" src="{{ artist?.images?.length > 0 ? artist.images[0].url : 'assets/images/default-image.png' }}" alt="{{ 'image of ' + artist.name }}" /></figure>
+    <div class="card-body">
+      <star-rating [starType]="'svg'" [rating]="artist?.popularity / 10"></star-rating>
+      <h2 class="card-title">{{ artist.name }}</h2>
+      <p>{{ artist?.followers?.total | number }} Followers</p>
+    </div>
+  </a>
+</div>
+
+  
+  

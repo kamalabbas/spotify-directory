@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArtistService } from './servivces/artist.service';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-artist',
@@ -13,16 +15,13 @@ export class ArtistComponent implements OnInit {
 
   constructor(
     private artistService: ArtistService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.artistName = this.activatedRoute.snapshot.queryParams['name'];
-    
-    // this.activatedRoute.queryParams.subscribe((res) => {
-    //   this.artistName = res['name'];
-    // });
 
     this.artistService.getArtist(id).subscribe({
       next: (res: any) => {
@@ -30,5 +29,9 @@ export class ArtistComponent implements OnInit {
       },
       error: (err: any) => {},
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
