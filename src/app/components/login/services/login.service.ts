@@ -21,42 +21,67 @@ export class LoginService {
     return result;
   }
 
-  login() {
-    let state = this.generateRandomString(16);
-    let scope = 'user-read-private user-read-email';  
+  // login() {
+  //   let state = this.generateRandomString(16);
+  //   let scope = 'user-read-private user-read-email';  
 
-    const spotifyLoginWindow = window.open(
-      `https://accounts.spotify.com/authorize?client_id=${environment.client_id}&redirect_uri=${environment.spotify_redirect_uri}&response_type=code&scope=${scope}&state=${state}`,
-      '_self'
-    );
-  }
+  //   const spotifyLoginWindow = window.open(
+  //     `https://accounts.spotify.com/authorize?client_id=${environment.client_id}&redirect_uri=${environment.spotify_redirect_uri}&response_type=code&scope=${scope}&state=${state}`,
+  //     '_self'
+  //   );
+  // }
 
-  getToken(code: string) {
+  // getToken(code: string) {
 
-    if(localStorage.getItem('userInfo')) {
-      localStorage.removeItem('userInfo');
-    }
+  //   if(localStorage.getItem('userInfo')) {
+  //     localStorage.removeItem('userInfo');
+  //   }
 
-    const searchParams = new URLSearchParams([
-      ['grant_type', 'authorization_code'],
-      ['code', code],
-      ['redirect_uri', environment.spotify_redirect_uri]
-    ]);
+  //   const searchParams = new URLSearchParams([
+  //     ['grant_type', 'authorization_code'],
+  //     ['code', code],
+  //     ['redirect_uri', environment.spotify_redirect_uri]
+  //   ]);
     
-    let headers = {
+  //   let headers = {
+  //     headers: {
+  //       'content-type': 'application/x-www-form-urlencoded',
+  //       'authorization': `Basic ${btoa(`${environment.client_id}:${environment.client_secret}`)}`,
+  //     },
+  //   };
+
+  //   this.http.post<any>(`https://accounts.spotify.com/api/token` , searchParams, headers).subscribe({
+  //     next:(res: any) => {
+  //       localStorage.setItem('userInfo', JSON.stringify(res));
+  //       this.router.navigate(['/home']);
+  //     },
+  //     error:(err: any) => {}
+  //   });
+  // }
+
+
+  
+  getToken() {
+    const headers = {
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
         'authorization': `Basic ${btoa(`${environment.client_id}:${environment.client_secret}`)}`,
       },
     };
 
-    this.http.post<any>(`https://accounts.spotify.com/api/token` , searchParams, headers).subscribe({
-      next:(res: any) => {
+    const searchParams = new URLSearchParams([
+      ['grant_type', 'client_credentials']
+    ]);
+
+
+    this.http.post(`https://accounts.spotify.com/api/token`, searchParams, headers).subscribe({
+      next: (res: any) => {
+        console.log(res);
         localStorage.setItem('userInfo', JSON.stringify(res));
         this.router.navigate(['/home']);
       },
       error:(err: any) => {}
-    });
-
+    }) 
   }
+
 }

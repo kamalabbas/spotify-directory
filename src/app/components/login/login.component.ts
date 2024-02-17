@@ -15,14 +15,14 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const code = this.activatedRoute.snapshot.queryParams['code'];
-    if(!!code) {
-      this.loginService.getToken(code);
-    }
+    // const code = this.activatedRoute.snapshot.queryParams['code'];
+    // if(!!code) {
+    //   this.loginService.getToken(code);
+    // }
   }
 
   login() {
-    this.loginService.login();
+    this.loginService.getToken();
   }
 
 }
