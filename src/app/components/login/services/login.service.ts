@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/common-services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Token } from 'src/app/interfaces/token';
 
 @Injectable({
   providedIn: 'root',
@@ -76,7 +77,6 @@ export class LoginService {
 
     this.http.post(`https://accounts.spotify.com/api/token`, searchParams, headers).subscribe({
       next: (res: any) => {
-        console.log(res);
         localStorage.setItem('userInfo', JSON.stringify(res));
         this.router.navigate(['/home']);
       },
