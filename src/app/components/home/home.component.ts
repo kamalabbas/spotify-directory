@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   offset: number = 0;
 
+  loading: boolean = false;
   artists: Array<any> = [];
   searchText: string = decodeURIComponent(this.activatedRoute.snapshot.queryParams['keyword'] || '');
 
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if(this.searchText != '') {
       this.search();
-    } 
+    }
 
     this.activatedRoute.queryParams.subscribe((q) => {
       if (q['keyword'] && q['keyword'] != this.searchText) {
@@ -48,26 +49,30 @@ export class HomeComponent implements OnInit {
   }
 
   search() {
+    this.loading = true;
     this.homeService.searchForArtists(this.searchText, this.offset).subscribe({
       next: (res: any) => {
         if(this.artists.length > 0) {
           this.artists = [...this.artists, ...res.artists.items];
-          
+
         } else {
           this.artists = res.artists.items;
         }
-        
+
         this.router.navigate([], {
           queryParams: {
             keyword: encodeURIComponent(this.searchText),
           },
           relativeTo: this.activatedRoute,
         });
+        this.loading = false;        
       },
       error: (err: any) => {
         this.artists = [];
         this.offset = 0;
+        this.loading = false;
       },
+
     });
   }
 

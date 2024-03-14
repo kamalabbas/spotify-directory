@@ -16,7 +16,7 @@ export class DefaultInterceptor implements HttpInterceptor {
 
   private handelError(err: HttpErrorResponse): Observable<any> {
     if (err.status === 401 || err.status === 403) {
-      localStorage.removeItem('userInfo');
+      sessionStorage.removeItem('userInfo');
       this.router.navigateByUrl(`/login`);
     }
     return throwError(() => new Error(''));
@@ -26,7 +26,7 @@ export class DefaultInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    let localStorageUserInfo = localStorage.getItem('userInfo');
+    let localStorageUserInfo = sessionStorage.getItem('userInfo');
 
     if(localStorageUserInfo != null ) {
       const userInfo: User =  JSON.parse(localStorageUserInfo);

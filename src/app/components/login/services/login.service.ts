@@ -75,7 +75,7 @@ export class LoginService {
 
     this.http.post(`https://accounts.spotify.com/api/token`, searchParams, headers).subscribe({
       next: (res: any) => {
-        localStorage.setItem('userInfo', JSON.stringify(res));
+        sessionStorage.setItem('userInfo', JSON.stringify(res));
         this.router.navigate(['/home']);
       },
       error:(err: any) => {}

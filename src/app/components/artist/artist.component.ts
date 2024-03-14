@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class ArtistComponent implements OnInit {
   artist: any;
   artistName: string = '';
+  loading: boolean = false;
 
   constructor(
     private artistService: ArtistService,
@@ -20,14 +21,18 @@ export class ArtistComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.artistName = this.activatedRoute.snapshot.queryParams['name'];
 
     this.artistService.getArtist(id).subscribe({
       next: (res: any) => {
         this.artist = res;
+        this.loading = false;
       },
-      error: (err: any) => {},
+      error: (err: any) => {
+        this.loading = false;
+      },
     });
   }
 

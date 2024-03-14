@@ -5,6 +5,8 @@
   </div>
 </div>
 
+
+<app-skeleton [loading]="loading"></app-skeleton>
 <div class="mt-6 grid md:grid-cols-4 gap-6" *ngIf="artist?.items.length > 0">
   <div class="card glass shadow-xl" *ngFor="let album of artist.items">        
     <figure><img src="{{ album.images.length > 0 ? album.images[0].url : '/assets/images/default-image.png' }}" alt="{{ 'image of ' + album.name }}" /></figure>

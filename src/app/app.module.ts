@@ -18,7 +18,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { RouterModule } from '@angular/router';
-import { ItemsGridComponent } from './components/items-grid/items-grid.component';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, NotFoundComponent, ArtistRegistrationComponent],

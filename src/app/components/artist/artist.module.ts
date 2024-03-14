@@ -4,7 +4,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { ArtistRoutingModule } from './artist-routing.module';
 import { ArtistComponent } from './artist.component';
-
+import { SkeletonComponent } from '../skeleton/skeleton.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import { ArtistComponent } from './artist.component';
   imports: [
     CommonModule,
     ArtistRoutingModule,
-    MatIconModule
+    MatIconModule,
+    SkeletonComponent
   ]
 })
 export class ArtistModule { }

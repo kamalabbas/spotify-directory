@@ -1,0 +1,9 @@
+<div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6" *ngIf="loading">
+  <div *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]">
+    <div class="card shadow-xl">
+      <ngx-skeleton-loader [theme]="{ height: '300px' }" animation="pulse" />
+      <ngx-skeleton-loader count="3" animation="pulse" />
+    </div>
+  </div>
+</div>
+

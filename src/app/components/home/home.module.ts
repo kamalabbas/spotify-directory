@@ -6,19 +6,21 @@ import { StarRatingModule } from 'angular-star-rating';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { ItemsGridComponent } from '../items-grid/items-grid.component';
+import { SkeletonComponent } from '../skeleton/skeleton.component';
+// import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    ItemsGridComponent   
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     FormsModule,
     InfiniteScrollModule,
-    StarRatingModule.forRoot()
+    // NgxSkeletonLoaderModule,
+    StarRatingModule.forRoot(),
+    SkeletonComponent
   ]
 })
 export class HomeModule { }
