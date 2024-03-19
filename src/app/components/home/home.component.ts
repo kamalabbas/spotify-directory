@@ -25,27 +25,29 @@ export class HomeComponent implements OnInit {
   subject = new Subject<string>();
   results$: Observable<string> = this.subject.asObservable();
 
-
   ngOnInit(): void {
-    if(this.searchText != '') {
-      this.search();
-    }
-
-    this.activatedRoute.queryParams.subscribe((q) => {
-      if (q['keyword'] && q['keyword'] != this.searchText) {
-        this.searchText = decodeURIComponent(q['keyword']);
-        this.search();
-      } else if (!q['keyword']) {
-        this.searchText = '';
-        this.artists = [];
-      }
-    });
+    // this.activatedRoute.queryParams.subscribe((q) => {
+    //   if (q['keyword'] && q['keyword'] != this.searchText) {
+    //     this.searchText = decodeURIComponent(q['keyword']);
+    //     this.search();
+    //   } else if (!q['keyword']) {
+    //     this.searchText = '';
+    //     this.artists = [];
+    //   }
+    // });
 
     this.results$.pipe(debounceTime(800)).subscribe(() => {
       this.artists = [];
       this.offset = 0;
       this.search();
     });
+
+    if(this.searchText != '') {
+      this.search();
+    } else {
+      this.searchText = 'tag';
+      this.search();
+    }
   }
 
   search() {
